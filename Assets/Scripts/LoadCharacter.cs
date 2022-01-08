@@ -8,7 +8,7 @@ public class LoadCharacter : MonoBehaviour
 
     public static GameObject LoadData()
     {
-        GameObject characterPrefabIn = new GameObject();
+        GameObject characterPrefabIn;
         prefab = Resources.Load("Character/Character");
         characterPrefabIn =GameObject.Instantiate(prefab) as GameObject;
         return characterPrefabIn;

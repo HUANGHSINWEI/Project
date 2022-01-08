@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
+    public float speed;
+    private List<GameObject> monsterPrefabIns;
     private List<GameObject> terrainPrefabIns;
     private GameObject player;
     delegate void keydown();
@@ -12,6 +14,8 @@ public class Main : MonoBehaviour
 
     private void Awake()
     {
+        monsterPrefabIns=LoadMonster.LoadData();
+        Mobsposition();
         terrainPrefabIns = LoadTerrain.LoadData();
         player = LoadCharacter.LoadData();
         FlowPlayer.playerPos = player.transform;
@@ -32,24 +36,24 @@ public class Main : MonoBehaviour
         //}
         if (Input.GetKey(KeyCode.W))
         {
-            player.transform.position += player.transform.forward * Time.deltaTime;
+            player.transform.position += player.transform.forward * Time.deltaTime* speed;
         }
         if (Input.GetKey(KeyCode.A))
         {
 
             player.transform.Rotate(0, -100 * Time.deltaTime, 0);
-            player.transform.position += player.transform.forward * Time.deltaTime / 10;
+            player.transform.position += player.transform.forward * Time.deltaTime / 10* speed;
 
         }
         if (Input.GetKey(KeyCode.S))
         {
-            player.transform.position -= player.transform.forward * Time.deltaTime;
+            player.transform.position -= player.transform.forward * Time.deltaTime* speed;
         }
         if (Input.GetKey(KeyCode.D))
         {
 
             player.transform.Rotate(0, 100 * Time.deltaTime, 0);
-            player.transform.position += player.transform.forward * Time.deltaTime / 10;
+            player.transform.position += player.transform.forward * Time.deltaTime / 10* speed;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -59,7 +63,15 @@ public class Main : MonoBehaviour
         }
 
     }
-
+    void Mobsposition()
+    {
+        int count = 0;
+        for(int i=0; i< monsterPrefabIns.Count;i++)
+        {
+            monsterPrefabIns[i].transform.position = new Vector3(5.0f, 1.0f, 0.0f + count);
+            count+=8;
+        }
+    }
     void Controller()
     {
         creator[""] = () => { };
