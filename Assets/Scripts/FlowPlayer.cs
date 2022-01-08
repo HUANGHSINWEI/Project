@@ -12,6 +12,6 @@ public class FlowPlayer : MonoBehaviour
     void Update()
     {
 
-        gameObject.transform.position = playerPos.position+ offect;
+        gameObject.transform.position = new Vector3(playerPos.position.x+offect.x, gameObject.transform.position.y, playerPos.position.z+offect.z);
     }
 }
