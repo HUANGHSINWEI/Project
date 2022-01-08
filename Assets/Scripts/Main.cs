@@ -14,6 +14,7 @@ public class Main : MonoBehaviour
     {
         terrainPrefabIns = LoadTerrain.LoadData();
         player = LoadCharacter.LoadData();
+        FlowPlayer.playerPos = player.transform;
         Controller();
     }
     // Start is called before the first frame update
@@ -52,8 +53,11 @@ public class Main : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            player.transform.position -= player.transform.forward * Time.deltaTime;
+            //me.transform.position -= me.transform.forward * Time.deltaTime * KeySpace_weight;
+            player.transform.position += new Vector3(0, 1 , 0);
+            player.transform.position += player.transform.forward * Time.deltaTime ;
         }
+
     }
 
     void Controller()
