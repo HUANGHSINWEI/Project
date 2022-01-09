@@ -9,19 +9,17 @@ public class Main : MonoBehaviour
     private List<GameObject> monsterPrefabIns;
     private List<GameObject> terrainPrefabIns;
     private GameObject player;
-    delegate void keydown();
-    Dictionary<string, keydown> creator = new Dictionary<string, keydown>();
+    
+    
 
     private void Awake()
     {
-        monsterPrefabIns=LoadMonster.LoadData();
-        Mobsposition();
-        terrainPrefabIns = LoadTerrain.LoadData();
-        player = LoadCharacter.LoadData();
-        FlowPlayer.playerPos = player.transform;
-        Controller();
+        Terrain();
+        Mobs();
+        Player();
+        Camera();
+        
     }
-    // Start is called before the first frame update
     void Start()
     {
     }
@@ -29,11 +27,7 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.anyKey)
-        //{
-        //    Debug.Log(Input.inputString);
-        //    creator[Input.inputString]();
-        //}
+
         if (Input.GetKey(KeyCode.W))
         {
             player.transform.position += player.transform.forward * Time.deltaTime* speed;
@@ -57,11 +51,16 @@ public class Main : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //me.transform.position -= me.transform.forward * Time.deltaTime * KeySpace_weight;
             player.transform.position += new Vector3(0, 1 , 0);
             player.transform.position += player.transform.forward * Time.deltaTime ;
         }
 
+    }
+
+    void Mobs()
+    {
+        monsterPrefabIns = LoadMonster.LoadData();
+        Mobsposition();
     }
     void Mobsposition()
     {
@@ -72,20 +71,16 @@ public class Main : MonoBehaviour
             count+=8;
         }
     }
-    void Controller()
+    void Camera()
     {
-        creator[""] = () => { };
-        creator["w"] = () => player.transform.position += player.transform.forward * Time.deltaTime; ;
-        creator["s"] = () => player.transform.position -= player.transform.forward * Time.deltaTime;
-        creator["a"] = () => {
-                                player.transform.Rotate(0, -100 * Time.deltaTime, 0);
-                                player.transform.position += player.transform.forward * Time.deltaTime / 10;
-                             };
-        creator["d"] = () => {
-                                player.transform.Rotate(0, 100 * Time.deltaTime, 0);
-                                player.transform.position += player.transform.forward * Time.deltaTime / 10;
-                             };
-        creator["Space"] = () => player.transform.position -= player.transform.forward * Time.deltaTime;
+        FlowPlayer.playerPos = player.transform;
     }
-
+    void Player()
+    {
+        player = LoadCharacter.LoadData();
+    }
+    void Terrain()
+    {
+        terrainPrefabIns = LoadTerrain.LoadData();
+    }
 }
