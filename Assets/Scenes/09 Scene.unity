@@ -356,4 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0c01cb13dabef4282677fac9f65115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Heightx: 0
+  Heighty: 0
+  Heightz: 0
   offect: {x: 6, y: 4, z: 1}
