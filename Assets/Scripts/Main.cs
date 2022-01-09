@@ -9,8 +9,9 @@ public class Main : MonoBehaviour
     private List<GameObject> monsterPrefabIns;
     private List<GameObject> terrainPrefabIns;
     private GameObject player;
-    
-    
+
+    private Animator playerAnimator;
+    private Animation playerAnimation;
 
     private void Awake()
     {
@@ -78,6 +79,13 @@ public class Main : MonoBehaviour
     void Player()
     {
         player = LoadCharacter.LoadData();
+
+        playerAnimator = player.GetComponent<Animator>();
+        playerAnimation = player.GetComponent<Animation>();
+
+       
+
+        Debug.Log(playerAnimator);
     }
     void Terrain()
     {
