@@ -16,7 +16,7 @@ public class Main : MonoBehaviour
     private void Awake()
     {
         Terrain();
-        Mobs();
+        //Mobs();
         Player();
         Camera();
         
@@ -28,10 +28,15 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        AnimatorStateInfo stateinfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
         if (Input.GetKey(KeyCode.W))
         {
-            player.transform.position += player.transform.forward * Time.deltaTime* speed;
+            playerAnimator.SetBool("isWalk", true);
+            player.transform.position += player.transform.forward * Time.deltaTime * speed;         
+        }
+        else 
+        {
+            playerAnimator.SetBool("isWalk", false);
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -42,7 +47,12 @@ public class Main : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S))
         {
+            playerAnimator.SetBool("isWalkB", true);
             player.transform.position -= player.transform.forward * Time.deltaTime* speed;
+        }
+        else
+        {
+            playerAnimator.SetBool("isWalkB", false);
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -81,11 +91,11 @@ public class Main : MonoBehaviour
         player = LoadCharacter.LoadData();
 
         playerAnimator = player.GetComponent<Animator>();
+        
         playerAnimation = player.GetComponent<Animation>();
 
        
 
-        Debug.Log(playerAnimator);
     }
     void Terrain()
     {
